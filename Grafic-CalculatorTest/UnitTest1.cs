@@ -28,27 +28,34 @@ namespace Grafic_CalculatorTest
             List<decimal> numbers = operatorz.IsNumberNegative(calculation);
             Assert.AreEqual(numbers[0], -3);
             Assert.AreEqual(numbers[1], -546543);
+
+            calculation = "3-546543";
+            numbers = operatorz.IsNumberNegative(calculation);
+            Assert.AreEqual(numbers[0], 3);
+            Assert.AreEqual(numbers[1], 546543);
         }
 
         [TestMethod]
         public void TestUseOperator()
         {
             string use = operatorz.UseOperator(ops);
-            Assert.AreEqual(use, "*");
+            Assert.AreEqual(use, "-");
         }
 
         [TestMethod]
         public void TestOpOk()
         {            
-            Assert.IsTrue(operatorz.OpOk("-", "3*-"));
+            Assert.IsFalse(operatorz.OpOk("-", "3*-"));
         }
 
         [TestMethod]
-        public void TestWriteToFile() // Hjälp
+        public void TestWriteToFile() 
         {
             rw.WriteToFile(1, "-", 2, -1);
             List<string> history = rw.ShowHistory();
-            Assert.AreEqual(history.Contains, "1-2=-1");
+            history.Reverse();
+            string l = history[1];
+            Assert.AreEqual("1-2 = -1", l);
         }
 
         [TestMethod]
@@ -61,16 +68,16 @@ namespace Grafic_CalculatorTest
         [TestMethod]
         public void TestClearFile() // Hjälp
         {
-            //rw.ClearFile();
+            rw.ClearFile();
             List<string> history = rw.ShowHistory();
-            Assert.AreEqual("","");
+            Assert.AreEqual(null,history[0]);
         }
 
         [TestMethod]
-        public void TestCalc() // Fel variabeltyp vid användning av "," men uträkningen är rätt
+        public void TestCalc()
         {
-            decimal result = calc.Calc("43,1 + 1");
-            Assert.AreEqual(result, 44.1);
+            decimal result = calc.Calc("4,1 + 1");
+            Assert.AreEqual(result, 5.1m);
 
         }
     }
