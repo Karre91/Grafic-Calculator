@@ -9,29 +9,28 @@ namespace Grafic_Calculator
 {
     public class ReadAndWrite
     {
+        List<string> list = new List<string>();
+
         public void WriteToFile(decimal a, string op, decimal b, decimal res)
         {
-            StreamWriter sWrite = new StreamWriter("Sample.txt", true);
-
             try
             {
+                StreamWriter sWrite = new StreamWriter("Sample.txt", true) ;
                 sWrite.WriteLine(a + op + b + " = " + res);
+                sWrite.Close();
             }
             catch (Exception e)
             {
-                //list.Add("Exception: " + e);  // Kast här??
+                list.Add("Exception write: " + e);
             }
-            sWrite.Close();
         }
 
-        public List<string> ShowHistory() // EXEPTION FIXA
-        {
-            List<string> list = new List<string>();
+        public List<string> ShowHistory()
+        {            
             string line;
             try
             {
                 StreamReader sRead = new StreamReader("Sample.txt", true);
-
                 line = sRead.ReadLine();
                 list.Add(line);
                 while (line != null)
@@ -40,11 +39,10 @@ namespace Grafic_Calculator
                     list.Add(line);
                 }
                 sRead.Close();
-
             }
             catch (Exception e)
             {
-                list.Add("Exception: " + e);
+                list.Add("Exception read: " + e); //
             }
             return list;
         }

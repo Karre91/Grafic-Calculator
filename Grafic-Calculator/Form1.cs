@@ -30,8 +30,7 @@ namespace Grafic_Calculator
         {
             textBox.Text = "0";
             AbleOp(isTextboxReady());
-            AbleEqual(isTextboxReady());
-            
+            AbleEqual(isTextboxReady());            
         }
         private void DEL_Click(object sender, EventArgs e) 
         {
@@ -78,19 +77,8 @@ namespace Grafic_Calculator
             else
             {
                 textBox.Text += button.Text;
-                AbleOp(isTextboxReady());
-
-                string[] tmpspl = textBox.Text.Split(ops);
-                tmpspl = tmpspl.Where(val => val != "").ToArray();   
-                
-                if (tmpspl.Count() == 2)
-                {
-                    AbleEqual(isTextboxReady());
-                }            
-                else
-                {
-                    AbleEqual(isTextboxReady());
-                }
+                AbleOp(isTextboxReady());                
+                AbleEqual(isTextboxReady());              
             }                
         }
         private void operator_Click(object sender, EventArgs e)
@@ -102,12 +90,9 @@ namespace Grafic_Calculator
             {
                 textBox.Text = button.Text;
             }
-            else if (operate.OpOk(button.Text, textBox.Text))
+            else if (operate.OpOk(button.Text, textBox.Text) && textBox.Text != "0")
             {
-                if (textBox.Text != "0")
-                {
-                    textBox.Text += button.Text;
-                }                            
+                textBox.Text += button.Text;                                          
             }
         }
         private void buttonEquals_Click(object sender, EventArgs e)

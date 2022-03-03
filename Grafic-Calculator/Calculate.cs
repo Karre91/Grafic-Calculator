@@ -22,7 +22,7 @@ namespace Grafic_Calculator
         public decimal Calc(string box)
         {
             List<char> UsedOps = Op.FindOperators(box);
-            List<decimal> Numb = Op.IsNumberNegative(box);
+            List<decimal> Numb = Op.SeparateNumbers(box);
             decimal a = Math.Round(Numb[0], 6);
             decimal b = Math.Round(Numb[1], 6);
             string op = Op.UseOperator(UsedOps);

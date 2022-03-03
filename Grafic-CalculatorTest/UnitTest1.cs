@@ -25,12 +25,12 @@ namespace Grafic_CalculatorTest
         public void TestIsNumberNegative()
         {
             string calculation = "-3--546543";
-            List<decimal> numbers = operatorz.IsNumberNegative(calculation);
+            List<decimal> numbers = operatorz.SeparateNumbers(calculation);
             Assert.AreEqual(numbers[0], -3);
             Assert.AreEqual(numbers[1], -546543);
 
             calculation = "3-546543";
-            numbers = operatorz.IsNumberNegative(calculation);
+            numbers = operatorz.SeparateNumbers(calculation);
             Assert.AreEqual(numbers[0], 3);
             Assert.AreEqual(numbers[1], 546543);
         }
@@ -44,8 +44,11 @@ namespace Grafic_CalculatorTest
 
         [TestMethod]
         public void TestOpOk()
-        {            
-            Assert.IsFalse(operatorz.OpOk("-", "3*-"));
+        {
+            bool answ = operatorz.OpOk("-", "3*-");
+            Assert.IsFalse(answ);
+            answ = operatorz.OpOk("+", "0");
+            Assert.IsFalse(answ);
         }
 
         [TestMethod]

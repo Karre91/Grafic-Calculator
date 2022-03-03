@@ -12,10 +12,6 @@ namespace Grafic_Calculator
     {
         public readonly char[] ops = { '*', '-', '+', '/' };
         
-        private string op;
-        
-        private decimal a;
-        private decimal b;
 
         public List<char> FindOperators(string box) // REGEX?
         {
@@ -32,8 +28,10 @@ namespace Grafic_Calculator
             }
             return UsedOperators;
         }
-        public List<decimal> IsNumberNegative(/*List<char> UsedOps,*/ string box) // byt namn
+        public List<decimal> SeparateNumbers(string box) 
         {
+            decimal a;
+            decimal b;
             List<decimal> Nr = new List<decimal>();
             int r = 0;      
             string[] splitted = box.Split(ops);
@@ -76,6 +74,7 @@ namespace Grafic_Calculator
         }
         public string UseOperator(List<char> UsedOps)
         {
+            string op;
             UsedOps.RemoveAll(o => o == '-');
             if (UsedOps.Count == 0)
             {
